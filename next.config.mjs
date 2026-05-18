@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  distDir: '.next',
+  trailingSlash: false,
+  output: 'standalone'
+};
 
 export default nextConfig;
-
