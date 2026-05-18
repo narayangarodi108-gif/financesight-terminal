@@ -1,405 +1,309 @@
-use client";
+"use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  TrendingUp, 
-  TrendingDown, 
+  Newspaper, 
+  Sliders, 
+  Briefcase, 
   Activity, 
-  Layers, 
-  Settings, 
   Search, 
-  RefreshCw, 
-  ArrowUpRight,
-  Terminal,
-  Cpu,
-  BarChart3,
-  Bell,
-  User,
-  Calculator,
-  Newspaper,
-  Radio,
-  Sliders,
-  Sparkles,
-  PieChart
-} from "lucide-react";
+  ShieldCheck, 
+  Flame, 
+  TrendingUp, 
+  BellRing, 
+  Plus, 
+  Check 
+} from 'lucide-react';
 
-export default function FinanceSightQuantumTerminal() {
-  const [activeTab, setActiveTab] = useState("dashboard");
-  const [searchQuery, setSearchQuery] = useState("");
-  
-  // Advanced Calculator States
-  const [calcType, setCalcType] = useState("sip");
-  const [sipAmount, setSipAmount] = useState(5000);
-  const [sipRate, setSipRate] = useState(12);
-  const [sipYears, setSipYears] = useState(10);
-  
-  const [emiLoan, setEmiLoan] = useState(1000000);
-  const [emiRate, setEmiRate] = useState(8.5);
-  const [emiMonths, setEmiMonths] = useState(120);
+export default function FinanceSightTerminal() {
+  const [activeTab, setActiveTab] = useState('wire');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [watchlist, setWatchlist] = useState(['AAPL']);
+  const [activeAsset, setActiveAsset] = useState('AAPL');
 
-  // Expanded Data-Driven Asset State Engine (with correct calculations and live status ratings)
-  const assetsDatabase = [
-    { ticker: "NVDA", name: "NVIDIA Corp.", sector: "Semiconductors", price: "914.30", change: "+4.85%", up: true, rating: "STRONG BUY", cap: "$2.28T", volume: "42.1M", rsi: "68.4" },
-    { ticker: "AAPL", name: "Apple Inc.", sector: "Consumer Tech", price: "181.25", change: "-0.42%", up: false, rating: "HOLD", cap: "$2.62T", volume: "51.8M", rsi: "44.2" },
-    { ticker: "MSFT", name: "Microsoft Corp.", sector: "Cloud Systems", price: "420.55", change: "+1.12%", up: true, rating: "BUY", cap: "$3.15T", volume: "22.9M", rsi: "59.1" },
-    { ticker: "TSLA", name: "Tesla Motors", sector: "Automotive/EV", price: "174.90", change: "-2.35%", up: false, rating: "UNDERWEIGHT", cap: "$556B", volume: "84.3M", rsi: "35.8" },
-    { ticker: "BTC", name: "Bitcoin Core", sector: "Crypto Digital Asset", price: "66,420", change: "+4.12%", up: true, rating: "STRONG BUY", cap: "$1.31T", volume: "38.5B", rsi: "71.2" },
-    { ticker: "ETH", name: "Ethereum Network", sector: "Smart Contract Layer", price: "3,485.10", change: "+3.24%", up: true, rating: "BUY", cap: "$418B", volume: "19.2B", rsi: "62.8" }
-  ];
+  // Interactive Calculator States
+  const [calcSavings, setCalcSavings] = useState(5000);
+  const [calcDebt, setCalcDebt] = useState(200000);
+  const [calcDiv, setCalcDiv] = useState(4);
+  const [calcEmerg, setCalcEmerg] = useState(15000);
 
-  // System Live Neural Feed News Dataset
-  const wireNews = [
-    { id: 1, type: "SYSTEM_ALPHA", timestamp: "02:06:14", text: "Neural Model V2.6 flagged high liquidity inflows on semiconductor options chains.", urgency: "HIGH" },
-    { id: 2, type: "MARKET_ROTATION", timestamp: "01:58:40", text: "Cross-platform growth index shifts +14.2% towards enterprise compute infrastructure nodes.", urgency: "MEDIUM" },
-    { id: 3, type: "MACRO_SIGNAL", timestamp: "01:42:11", text: "Aggregated global asset safety validation matrices confirmed stable at 100/100 threshold.", urgency: "LOW" }
-  ];
+  // Financial Health Calculation Matrix Formula variables
+  const [healthScore, setHealthScore] = useState(80);
 
-  // Interactive Calculator Math Engines
-  const calculateSIP = () => {
-    const P = sipAmount;
-    const i = (sipRate / 100) / 12;
-    const n = sipYears * 12;
-    const futureValue = P * [Math.pow(1 + i, n) - 1] * (1 + i) / i;
-    const invested = P * n;
-    return { Total: Math.round(futureValue).toLocaleString(), Wealth: Math.round(futureValue - invested).toLocaleString() };
+  useEffect(() => {
+    // Basic calculation for live health score index stability
+    const savingsFactor = Math.min((calcSavings / 10000) * 30, 30);
+    const debtFactor = Math.max(35 - (calcDebt / 50000), 5);
+    const emergFactor = Math.min((calcEmerg / 20000) * 35, 35);
+    const calculatedScore = Math.round(savingsFactor + debtFactor + emergFactor);
+    setHealthScore(Math.min(Math.max(calculatedScore, 10), 100));
+  }, [calcSavings, calcDebt, calcEmerg]);
+
+  const ASSET_DATABASE = {
+    "AAPL": {
+      name: "Apple Inc.",
+      score: 78,
+      rating: "Buy",
+      confidence: "89%",
+      speed: 75,
+      narrative: [
+        { d: "Jan", h: "Cycle Shift", b: "Lags in hardware volumes evaluated." },
+        { d: "Mar", h: "Margin Alpha", b: "Services yield reaches alpha structural highs." }
+      ],
+      signals: [
+        { type: "cyan", text: "Ecosystem Support Inflow" },
+        { type: "gold", text: "Margin Expansion Spike" }
+      ]
+    },
+    "NVDA": {
+      name: "NVIDIA Corp.",
+      score: 94,
+      rating: "Strong Buy",
+      confidence: "96%",
+      speed: 92,
+      narrative: [
+        { d: "Feb", h: "Compute Surge", b: "Enterprise AI backlogs expand demand limits." },
+        { d: "May", h: "Monopoly Lock", b: "Hyperscaler capex solidifies node dominance." }
+      ],
+      signals: [
+        { type: "green", text: "Aggressive Call Option Blocks" },
+        { type: "red", text: "Volatility Velocity Deflection" }
+      ]
+    }
   };
 
-  const calculateEMI = () => {
-    const P = emiLoan;
-    const r = (emiRate / 100) / 12;
-    const n = emiMonths;
-    const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-    const totalPayable = emi * n;
-    return { Monthly: Math.round(emi).toLocaleString(), Interest: Math.round(totalPayable - P).toLocaleString() };
+  const toggleWatchlist = (ticker: string) => {
+    setWatchlist(prev => 
+      prev.includes(ticker) ? prev.filter(t => t !== ticker) : [...prev, ticker]
+    );
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleanKey = searchQuery.toUpperCase().trim();
+    if (ASSET_DATABASE[cleanKey]) {
+      setActiveAsset(cleanKey);
+      setActiveTab('desk');
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#07080E] text-slate-200 font-sans flex flex-col antialiased selection:bg-purple-500/30">
+    <div className="min-h-screen bg-black text-white font-mono flex flex-col p-4 antialiased selection:bg-neon-green/30">
       
-      {/* Top Glassmorphic Navigation Banner Layout */}
-      <header className="bg-[#0E101A]/80 backdrop-blur-xl px-6 py-4 flex items-center justify-between border-b border-[#1A1E33] shadow-lg sticky top-0 z-50">
-        <div className="flex items-center space-x-3">
-          <div className="h-2.5 w-2.5 rounded-full bg-indigo-500 animate-ping" />
-          <span className="text-xs uppercase tracking-widest font-mono text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-md border border-indigo-500/20">Data Streaming Active</span>
-          <span className="text-xs uppercase tracking-widest font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-md border border-emerald-500/20 hidden sm:inline-block">Live System Health</span>
+      {/* HOLOGRAPHIC SCROLLING WIRE TICKER DOCK */}
+      <div className="w-full bg-[#050505] border border-zinc-900 rounded-xl p-3 mb-4 overflow-hidden text-xs flex items-center justify-between shadow-2xl">
+        <div className="flex space-x-6 items-center animate-pulse">
+          <span className="text-zinc-500 font-bold tracking-widest">S&P 500</span>
+          <span className="text-emerald-400 font-bold">7,379.8 (+0.14%)</span>
+          <span className="text-zinc-700">|</span>
+          <span className="text-zinc-500 font-bold tracking-widest">NASDAQ 100</span>
+          <span className="text-rose-500 font-bold">28,893.9 (-0.42%)</span>
         </div>
-
-        <div className="flex items-center space-x-4">
-          <div className="relative w-48 sm:w-64">
-            <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-500" />
-            <input 
-              type="text" 
-              placeholder="Search assets, parameters... (⌘ + F)" 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#131726] border border-[#202740] rounded-xl py-2 pl-9 pr-4 text-xs text-white outline-none focus:border-indigo-500/50 transition-all font-medium"
-            />
-          </div>
-          <button className="p-2 rounded-xl bg-[#131726] border border-[#202740] text-slate-400 hover:text-white relative"><Bell className="h-4 w-4" /><span className="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-amber-400" /></button>
-          <div className="flex items-center space-x-2 bg-[#131726]/80 p-1.5 pr-3 rounded-xl border border-[#202740]">
-            <div className="h-6 w-6 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-[10px] font-bold text-white">P</div>
-            <span className="text-xs font-semibold text-white hidden sm:inline">Pranav</span>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Structural Quantix Grid Dashboard */}
-      <div className="flex-1 flex flex-col lg:flex-row">
-        
-        {/* Left Side Frosted Control Deck Menu */}
-        <aside className="w-full lg:w-64 bg-[#0B0D16]/90 p-4 flex flex-col space-y-1.5 border-r border-[#15192B] shadow-2xl">
-          <div className="px-3 py-3 mb-5">
-            <h1 className="text-lg font-black tracking-wide flex items-center space-x-2 text-white">
-              <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">financeSight</span>
-              <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 border border-purple-500/30">NEXUS</span>
-            </h1>
-          </div>
-
-          {[
-            { id: "dashboard", label: "Dashboard Hub", icon: Activity },
-            { id: "screener", label: "Asset Core Screener", icon: BarChart3 },
-            { id: "calculators", label: "SIP / EMI Tool Suite", icon: Calculator },
-            { id: "wire", label: "Neural News Wire", icon: Radio },
-            { id: "system", label: "Quantix Metrics", icon: Settings },
-          ].map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`flex items-center space-x-3 p-3 px-4 rounded-xl text-xs font-semibold tracking-wide transition-all duration-150 ${
-                  isActive 
-                    ? "bg-[#181C30] text-indigo-400 border border-indigo-500/20 shadow-lg" 
-                    : "text-slate-400 hover:text-slate-200 hover:bg-[#111424]/50"
-                }`}
-              >
-                <Icon className={`h-4 w-4 ${isActive ? "text-indigo-400" : "text-slate-500"}`} />
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-
-          {/* Interactive Action Widget Inside Sidebar */}
-          <div className="pt-8 mt-auto hidden lg:block">
-            <div className="bg-gradient-to-b from-[#131726] to-[#0E101A] border border-[#202740] rounded-2xl p-4 relative overflow-hidden text-center">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 h-12 w-12 bg-purple-500/10 rounded-full blur-xl" />
-              <Sparkles className="h-5 w-5 text-purple-400 mx-auto mb-2 animate-pulse" />
-              <h4 className="text-xs font-bold text-white mb-1">Quantum Intelligence</h4>
-              <p className="text-[10px] text-slate-500 mb-3">Run multi-layered quantitative backtesting scripts.</p>
-              <button onClick={() => setActiveTab("calculators")} className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold text-[11px] py-2 rounded-xl transition-all shadow-md shadow-indigo-500/10">Initialize Modules</button>
-            </div>
-          </div>
-        </aside>
-         {/* Primary Analytical Stage Monitor Workspace */}
-        <main className="flex-1 p-6 lg:p-8 overflow-y-auto space-y-6">
-          
-          {/* Dashboard Summary Widget Set */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div className="bg-[#0E111C] border border-[#1A1F36] rounded-2xl p-5 flex flex-col justify-between">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-slate-500">Cross-Platform Growth Score</span>
-              <div className="flex items-center justify-between mt-3">
-                <span className="text-2xl font-black text-white">78%</span>
-                <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">+15.5% ↑</span>
-              </div>
-              <div className="h-1 bg-[#181C2E] rounded-full mt-4 overflow-hidden"><div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 w-[78%]" /></div>
-            </div>
-
-            <div className="bg-[#0E111C] border border-[#1A1F36] rounded-2xl p-5 flex flex-col justify-between">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-slate-500">Recurring Net Revenue</span>
-              <div className="flex items-center justify-between mt-3">
-                <span className="text-2xl font-black text-white">$54,200</span>
-                <span className="text-xs text-slate-400 font-mono">USD/MO</span>
-              </div>
-              <div className="text-[10px] text-slate-500 font-medium mt-4 flex items-center"><RefreshCw className="h-3 w-3 text-indigo-400 mr-1 animate-spin" /> Live Data Refresh Pipeline</div>
-            </div>
-
-            <div className="bg-[#0E111C] border border-[#1A1F36] rounded-2xl p-5 flex flex-col justify-between">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-slate-500">User Cohort Retention</span>
-              <div className="flex items-center justify-between mt-3">
-                <span className="text-2xl font-black text-white">21.5%</span>
-                <span className="text-[10px] font-bold text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-full border border-rose-500/20">-0.3% ↓</span>
-              </div>
-              <div className="text-[10px] text-indigo-400 font-bold bg-indigo-500/5 px-2.5 py-1 rounded-lg border border-indigo-500/10 w-fit mt-4">CHURN_WARN_LEVEL: SYSTEM_OPTIMIZED</div>
-            </div>
-          </div>
-
-          {/* Tab Router Section Workspace View */}
-          {activeTab === "dashboard" && (
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-              
-              {/* Massive Data-Driven Network Allocation Display Container */}
-              <div className="xl:col-span-2 bg-[#0E111C] border border-[#1A1F36] rounded-2xl p-6 shadow-xl flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between border-b border-[#1A1F36] pb-4 mb-5">
-                    <div className="flex items-center space-x-2">
-                      <Layers className="h-4 w-4 text-indigo-400" />
-                      <h3 className="text-xs font-black uppercase tracking-wider text-white">Active Core Portfolios Matrix</h3>
-                    </div>
-                    <span className="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-md border border-indigo-500/20">VALUATION_ENGINE: ONLINE</span>
-                  </div>
-
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-xs font-medium">
-                      <thead>
-                        <tr className="text-slate-500 text-[10px] uppercase tracking-wider font-bold border-b border-[#1A1F36] pb-2">
-                          <th className="pb-3">Asset</th>
-                          <th className="pb-3">Live Market Price</th>
-                          <th className="pb-3">24H Delta</th>
-                          <th className="pb-3">Neural Rating</th>
-                          <th className="pb-3 text-right">RSI (14)</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-[#181C2E]">
-                        {assetsDatabase.slice(0,4).map((asset) => (
-                          <tr key={asset.ticker} className="group hover:bg-[#131726]/30 transition-colors">
-                            <td className="py-3.5"><div className="font-bold text-white text-sm">{asset.ticker}</div><div className="text-[10px] text-slate-500">{asset.name}</div></td>
-                            <td className="py-3.5 font-mono text-white font-bold">${asset.price}</td>
-                            <td className="py-3.5 font-mono"><span className={`font-bold ${asset.up ? "text-emerald-400" : "text-rose-400"}`}>{asset.change}</span></td>
-                            <td className="py-3.5"><span className={`text-[9px] font-bold tracking-wider px-2 py-0.5 rounded border ${asset.up ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-amber-500/10 text-amber-400 border-amber-500/20"}`}>{asset.rating}</span></td>
-                            <td className="py-3.5 text-right font-mono text-slate-400">{asset.rsi}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-
-              {/* Real-time Processing News Network Row */}
-              <div className="bg-[#0E111C] border border-[#1A1F36] rounded-2xl p-6 flex flex-col justify-between shadow-xl">
-                <div>
-                  <div className="flex items-center space-x-2 text-xs font-black tracking-wider text-white border-b border-[#1A1F36] pb-4 mb-4">
-                    <Radio className="h-4 w-4 text-purple-400" />
-                    <span>Neural Event Stream Matrix</span>
-                  </div>
-                  <div className="space-y-3">
-                    {wireNews.map((news) => (
-                      <div key={news.id} className="p-3 bg-[#131726]/60 border border-[#1D233D] rounded-xl text-xs font-medium space-y-1">
-                        <div className="flex justify-between items-center text-[10px]">
-                          <span className="text-purple-400 font-mono font-bold">[{news.type}]</span>
-                          <span className="text-slate-500">{news.timestamp}</span>
-                        </div>
-                        <p className="text-slate-300 leading-normal">{news.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          )}
-
-          {/* Full Asset Advanced Screener Frame Layout */}
-          {activeTab === "screener" && (
-            <div className="bg-[#0E111C] border border-[#1A1F36] rounded-2xl shadow-xl overflow-hidden">
-              <div className="p-5 border-b border-[#1A1F36] flex items-center justify-between bg-[#111524]">
-                <div className="flex items-center space-x-2">
-                  <BarChart3 className="h-4 w-4 text-indigo-400" />
-                  <span className="text-xs font-black text-white uppercase tracking-wider">Comprehensive Real-Time Sector Matrix Screener</span>
-                </div>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs font-medium">
-                  <thead>
-                    <tr className="bg-[#121626] text-slate-500 text-[10px] uppercase font-bold tracking-wider border-b border-[#1A1F36]">
-                      <th className="p-4 px-6">Entity Architecture</th>
-                      <th className="p-4">Sector Cluster</th>
-                      <th className="p-4">Spot Valuation</th>
-                      <th className="p-4">Delta Variance</th>
-                      <th className="p-4">Cap Volume</th>
-                      <th className="p-4">RSI Metric</th>
-                      <th className="p-4 text-right px-6">System Rating</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#181C2E]">
-                    {assetsDatabase.map((asset) => (
-                      <tr key={asset.ticker} className="hover:bg-[#131726]/40 transition-colors">
-                        <td className="p-4 px-6"><div className="font-bold text-white text-sm">{asset.ticker}</div><div className="text-[10px] text-slate-500">{asset.name}</div></td>
-                        <td className="p-4 text-slate-400 font-mono text-[11px]">{asset.sector}</td>
-                        <td className="p-4 text-white font-bold font-mono">${asset.price}</td>
-                        <td className="p-4 font-mono"><span className={`font-bold ${asset.up ? "text-emerald-400" : "text-rose-400"}`}>{asset.change}</span></td>
-                        <td className="p-4 text-slate-400 font-mono">{asset.cap} / {asset.volume}</td>
-                        <td className="p-4 font-mono text-slate-300">{asset.rsi}</td>
-                        <td className="p-4 text-right px-6"><span className={`text-[9px] font-bold px-2 py-0.5 rounded border ${asset.up ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-rose-500/10 text-rose-400 border-rose-500/20"}`}>{asset.rating}</span></td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-
-          {/* Interactive SIP / EMI Mathematical Tools Suite View */}
-          {activeTab === "calculators" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              
-              {/* Systematic Investment Plan (SIP) Block Card */}
-              <div className="bg-[#0E111C] border border-[#1A1F36] rounded-2xl p-6 shadow-xl space-y-5">
-                <div className="flex items-center space-x-2 border-b border-[#1A1F36] pb-3">
-                  <Sliders className="h-4 w-4 text-indigo-400" />
-                  <h3 className="text-xs font-black text-white uppercase tracking-wider">SIP Capital Accumulation Predictor</h3>
-                </div>
-
-                <div className="space-y-4 text-xs font-medium">
-                  <div>
-                    <div className="flex justify-between mb-1.5"><span className="text-slate-400">Monthly Contribution Amount</span><span className="text-white font-bold font-mono">₹{sipAmount.toLocaleString()}</span></div>
-                    <input type="range" min="500" max="100000" step="500" value={sipAmount} onChange={(e) => setSipAmount(Number(e.target.value))} className="w-full h-1 bg-[#1A1F36] rounded-lg appearance-none cursor-pointer accent-indigo-500" />
-                  </div>
-                  <div>
-                    <div className="flex justify-between mb-1.5"><span className="text-slate-400">Expected Rate of Return (CAGR)</span><span className="text-white font-bold font-mono">{sipRate}%</span></div>
-                    <input type="range" min="1" max="30" step="0.5" value={sipRate} onChange={(e) => setSipRate(Number(e.target.value))} className="w-full h-1 bg-[#1A1F36] rounded-lg appearance-none cursor-pointer accent-indigo-500" />
-                  </div>
-                  <div>
-                    <div className="flex justify-between mb-1.5"><span className="text-slate-400">Duration Period Threshold</span><span className="text-white font-bold font-mono">{sipYears} Years</span></div>
-                    <input type="range" min="1" max="40" step="1" value={sipYears} onChange={(e) => setSipYears(Number(e.target.value))} className="w-full h-1 bg-[#1A1F36] rounded-lg appearance-none cursor-pointer accent-indigo-500" />
-                  </div>
-                </div>
-
-                <div className="bg-[#131726]/80 p-4 border border-[#1D233D] rounded-xl grid grid-cols-2 gap-4 text-center">
-                  <div><div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Total Projected Assets</div><div className="text-xl font-black text-emerald-400 font-mono mt-1">₹{calculateSIP().Total}</div></div>
-                  <div><div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Estimated Wealth Yield</div><div className="text-xl font-black text-indigo-400 font-mono mt-1">₹{calculateSIP().Wealth}</div></div>
-                </div>
-              </div>
-
-              {/* Equated Monthly Installment (EMI) Loan Block Card */}
-              <div className="bg-[#0E111C] border border-[#1A1F36] rounded-2xl p-6 shadow-xl space-y-5">
-                <div className="flex items-center space-x-2 border-b border-[#1A1F36] pb-3">
-                  <PieChart className="h-4 w-4 text-purple-400" />
-                  <h3 className="text-xs font-black text-white uppercase tracking-wider">EMI Debt Amortization Simulator</h3>
-                </div>
-
-                <div className="space-y-4 text-xs font-medium">
-                  <div>
-                    <div className="flex justify-between mb-1.5"><span className="text-slate-400">Principal Loan Quantity</span><span className="text-white font-bold font-mono">₹{emiLoan.toLocaleString()}</span></div>
-                    <input type="range" min="10000" max="10000000" step="50000" value={emiLoan} onChange={(e) => setEmiLoan(Number(e.target.value))} className="w-full h-1 bg-[#1A1F36] rounded-lg appearance-none cursor-pointer accent-purple-500" />
-                  </div>
-                  <div>
-                    <div className="flex justify-between mb-1.5"><span className="text-slate-400">Annual Nominal Interest Rate</span><span className="text-white font-bold font-mono">{emiRate}%</span></div>
-                    <input type="range" min="5" max="25" step="0.1" value={emiRate} onChange={(e) => setEmiRate(Number(e.target.value))} className="w-full h-1 bg-[#1A1F36] rounded-lg appearance-none cursor-pointer accent-purple-500" />
-                  </div>
-                  <div>
-                    <div className="flex justify-between mb-1.5"><span className="text-slate-400">Tenure Amortization Period</span><span className="text-white font-bold font-mono">{emiMonths} Months</span></div>
-                    <input type="range" min="6" max="360" step="6" value={emiMonths} onChange={(e) => setEmiMonths(Number(e.target.value))} className="w-full h-1 bg-[#1A1F36] rounded-lg appearance-none cursor-pointer accent-purple-500" />
-                  </div>
-                </div>
-
-                <div className="bg-[#131726]/80 p-4 border border-[#1D233D] rounded-xl grid grid-cols-2 gap-4 text-center">
-                  <div><div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Monthly Installment (EMI)</div><div className="text-xl font-black text-rose-400 font-mono mt-1">₹{calculateEMI().Monthly}</div></div>
-                  <div><div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Total Cumulative Interest</div><div className="text-xl font-black text-amber-400 font-mono mt-1">₹{calculateEMI().Interest}</div></div>
-                </div>
-              </div>
-
-            </div>
-          )}
-                {/* Full Isolated Neural Streaming Feed Terminal */}
-          {activeTab === "wire" && (
-            <div className="bg-[#0E111C] border border-[#1A1F36] rounded-2xl p-6 shadow-xl space-y-4">
-              <div className="flex items-center space-x-2 border-b border-[#1A1F36] pb-3">
-                <Newspaper className="h-4 w-4 text-indigo-400" />
-                <span className="text-xs font-black text-white uppercase tracking-wider">Live Global Alpha Stream & Analytical Wire Logs</span>
-              </div>
-              <div className="space-y-3 font-medium text-xs">
-                {wireNews.map((news) => (
-                  <div key={news.id} className="p-4 bg-[#131726]/40 border border-[#1E233D] rounded-xl flex items-start space-x-3 hover:border-indigo-500/20 transition-all">
-                    <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded border mt-0.5 ${news.urgency === "HIGH" ? "bg-rose-500/10 text-rose-400 border-rose-500/20" : "bg-indigo-500/10 text-indigo-400 border-indigo-500/20"}`}>{news.urgency}</span>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-center text-[10px] text-slate-500 font-mono"><span>SOURCE: HUB_{news.type}</span><span>TIMESTAMP: {news.timestamp}</span></div>
-                      <p className="text-slate-300 mt-1.5 leading-relaxed">{news.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Environmental Systems Settings View */}
-          {activeTab === "system" && (
-            <div className="bg-[#0E111C] border border-[#1A1F36] rounded-2xl p-6 shadow-xl text-xs space-y-3">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Quantix Platform Runtime Parameters</span>
-              <div className="bg-[#121524] p-5 rounded-xl border border-[#1F243D] text-slate-400 font-mono leading-relaxed space-y-1 shadow-inner">
-                <div>&gt; HOSTING_DECK: VERCEL_GLOBAL_EDGE_ROUTER</div>
-                <div>&gt; APPLICATION_FRAMEWORK: NEXT_JS_14_STABLE_APP_ROUTER</div>
-                <div>&gt; COMPILE_PIPELINE: TAILWIND_CSS_PASSING</div>
-                <div>&gt; INTERACTIVE_CALC_MATRIX: LINKED</div>
-                <div>&gt; FINANCIAL_DATASET_INTEGRITY: CERTIFIED_VALID</div>
-              </div>
-            </div>
-          )}
-
-        </main>
+        <div className="text-[10px] bg-zinc-900 text-zinc-400 px-2 py-0.5 rounded-md font-sans font-bold border border-zinc-800 uppercase tracking-widest">Node Stable</div>
       </div>
 
-      {/* Persistent Activation Foot Anchor Button Frame */}
-      <footer className="p-4 bg-[#0B0D16] border-t border-[#15192B] flex justify-center">
-        <button 
-          onClick={() => window.open("https://financesight.online", "_blank")}
-          className="w-full max-w-sm bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:brightness-110 active:scale-[0.99] text-white font-extrabold text-xs py-3.5 rounded-xl tracking-widest shadow-lg shadow-indigo-500/10 uppercase transition-all"
-        >
-          Activate Quantum Engine
-        </button>
-      </footer>
+      {/* BRAND INTERACTION TOP DECK */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-zinc-900">
+        <div>
+          <h1 className="text-2xl font-black bg-gradient-to-r from-white via-zinc-400 to-zinc-600 bg-clip-text text-transparent tracking-tighter">financeSight.online</h1>
+          <p className="text-[11px] text-zinc-500 font-sans font-semibold mt-0.5">AI Financial Intelligence & Narrative Tracking Terminal</p>
+        </div>
 
+        {/* STRATEGIC UNIFIED SEARCH ARCHITECTURE */}
+        <form onSubmit={handleSearch} className="flex items-center bg-[#070707] border border-zinc-800 rounded-xl focus-within:border-zinc-700 transition-all p-1.5 w-full md:w-96 shadow-inner">
+          <Search className="h-4 w-4 text-zinc-600 ml-2.5 mr-2" />
+          <input 
+            type="text" 
+            placeholder="Query assets or narratives (e.g., NVDA, AAPL)..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-transparent text-sm text-white outline-none placeholder-zinc-600"
+          />
+        </form>
+      </div>
+
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        {/* RETENTION MECHANISM: THE AI DAILY BRIEF SUMMARY CARD */}
+        <div className="lg:col-span-4 bg-[#050505] border border-zinc-900 rounded-2xl p-5 shadow-xl space-y-4">
+          <div className="flex items-center space-x-2 text-zinc-400">
+            <Flame className="h-4 w-4 text-orange-500" />
+            <span className="text-xs font-black tracking-widest uppercase">Today's Intelligent Brief Dispatch</span>
+          </div>
+          <div className="space-y-3">
+            <h2 className="text-lg font-bold text-zinc-200 leading-tight">Systemic Capital Re-Rotation Patterns</h2>
+            <p className="text-xs text-zinc-500 leading-relaxed">
+              Enterprise structural investments continue shielding accelerator compute nodes from localized liquidity deflections. Long-term capital accumulation metrics preserve support lines smoothly.
+            </p>
+            <div className="bg-[#090909] border border-zinc-800 rounded-xl p-3 flex justify-between items-center">
+              <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">Bullish Core AI Confidence</span>
+              <span className="text-sm font-black text-emerald-400">94%</span>
+            </div>
+          </div>
+
+          {/* WATCHLIST PERSISTENCE MODULE */}
+          <div className="pt-4 border-t border-zinc-900">
+            <span className="text-[10px] text-zinc-600 font-bold tracking-widest block mb-2.5 uppercase">Active Workspace Watchlist Monitor</span>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              {Object.keys(ASSET_DATABASE).map((ticker) => (
+                <button 
+                  key={ticker}
+                  onClick={() => { setActiveAsset(ticker); setActiveTab('desk'); }}
+                  className={`p-3 rounded-xl border transition-all text-left flex justify-between items-center ${activeAsset === ticker && activeTab === 'desk' ? 'bg-zinc-900 border-zinc-700 text-white' : 'bg-[#030303] border-zinc-900 text-zinc-400 hover:border-zinc-800'}`}
+                >
+                  <span className="font-bold">{ticker}</span>
+                  <span className="text-[10px] font-sans text-zinc-500 font-semibold">{ASSET_DATABASE[ticker].score}%</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* CORE CONTEXT INTERACTIVE TERMINAL VIEWS DECK */}
+        <div className="lg:col-span-8 flex flex-col space-y-4">
+          
+          {/* NAVIGATION BAR HEADER */}
+          <div className="flex bg-[#050505] p-1 border border-zinc-900 rounded-xl shadow-lg space-x-1">
+            <button onClick={() => setActiveTab('wire')} className={`flex-1 flex items-center justify-center space-x-2 py-2.5 text-xs font-bold rounded-lg transition-all ${activeTab === 'wire' ? 'bg-zinc-900 text-white border border-zinc-800' : 'text-zinc-500 hover:text-zinc-300'}`}>
+              <Newspaper className="h-3.5 w-3.5" />
+              <span>Wire</span>
+            </button>
+            <button onClick={() => setActiveTab('desk')} className={`flex-1 flex items-center justify-center space-x-2 py-2.5 text-xs font-bold rounded-lg transition-all ${activeTab === 'desk' ? 'bg-zinc-900 text-white border border-zinc-800' : 'text-zinc-500 hover:text-zinc-300'}`}>
+              <Briefcase className="h-3.5 w-3.5" />
+              <span>Desk</span>
+            </button>
+            <button onClick={() => setActiveTab('suite')} className={`flex-1 flex items-center justify-center space-x-2 py-2.5 text-xs font-bold rounded-lg transition-all ${activeTab === 'suite' ? 'bg-zinc-900 text-white border border-zinc-800' : 'text-zinc-500 hover:text-zinc-300'}`}>
+              <Sliders className="h-3.5 w-3.5" />
+              <span>Suite</span>
+            </button>
+          </div>
+
+          {/* DYNAMIC FRAME ROUTING MONITOR PANEL */}
+          <div className="bg-[#050505] border border-zinc-900 rounded-2xl p-6 min-h-[360px] shadow-2xl relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              
+              {/* TAB 1: EXPLAINABLE INTELLIGENCE BRIEF DATA CARD */}
+              {activeTab === 'desk' && (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} key="desk" className="space-y-5">
+                  <div className="flex items-center justify-between border-b border-zinc-900 pb-3">
+                    <div>
+                      <h3 className="text-lg font-black text-white tracking-tight">{ASSET_DATABASE[activeAsset].name}</h3>
+                      <p className="text-[10px] text-zinc-500 font-mono mt-0.5">Asset Frame Reference Matrix: {activeAsset}</p>
+                    </div>
+                    <button 
+                      onClick={() => toggleWatchlist(activeAsset)}
+                      className={`p-2 px-3 rounded-xl border text-xs font-bold flex items-center space-x-1.5 transition-all ${watchlist.includes(activeAsset) ? 'bg-zinc-900 border-zinc-700 text-white' : 'bg-transparent border-zinc-800 text-zinc-400 hover:border-zinc-700'}`}
+                    >
+                      {watchlist.includes(activeAsset) ? <Check className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
+                      <span>{watchlist.includes(activeAsset) ? 'Watching' : 'Track'}</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="bg-[#030303] border border-zinc-950 p-3 rounded-xl"><span className="text-[9px] text-zinc-600 block uppercase font-bold tracking-widest">AI Scoring</span><span className="text-xl font-black text-white">{ASSET_DATABASE[activeAsset].score}</span></div>
+                    <div className="bg-[#030303] border border-zinc-950 p-3 rounded-xl"><span className="text-[9px] text-zinc-600 block uppercase font-bold tracking-widest">Rating Tier</span><span className="text-xl font-black text-emerald-400">{ASSET_DATABASE[activeAsset].rating}</span></div>
+                    <div className="bg-[#030303] border border-zinc-950 p-3 rounded-xl"><span className="text-[9px] text-zinc-600 block uppercase font-bold tracking-widest">Confidence</span><span className="text-xl font-black text-zinc-400">{ASSET_DATABASE[activeAsset].confidence}</span></div>
+                  </div>
+
+                  {/* SIGNAL ALERTS ROW CONTAINER */}
+                  <div className="space-y-2">
+                    <span className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest block">Live Neural Alpha Signal Logs</span>
+                    <div className="flex flex-wrap gap-2">
+                      {ASSET_DATABASE[activeAsset].signals.map((sig, i) => (
+                        <span key={i} className={`text-[10px] font-bold px-3 py-1 rounded-md border ${sig.type === 'cyan' ? 'bg-cyan-500/5 text-cyan-400 border-cyan-500/20' : sig.type === 'gold' ? 'bg-amber-500/5 text-amber-400 border-amber-500/20' : sig.type === 'green' ? 'bg-emerald-500/5 text-emerald-400 border-emerald-500/20' : 'bg-rose-500/5 text-rose-400 border-rose-500/20'}`}>
+                          {sig.text}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* NARRATIVE TRACKING HISTORICAL SYSTEM ROW */}
+                  <div className="space-y-2 pt-2">
+                    <span className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest block">Historical Story-Arc Journey Track</span>
+                    <div className="space-y-2 font-sans">
+                      {ASSET_DATABASE[activeAsset].narrative.map((node, i) => (
+                        <div key={i} className="bg-[#030303] border border-zinc-950 p-3 rounded-xl text-xs flex items-start space-x-3">
+                          <span className="font-mono font-bold text-zinc-500 bg-zinc-950 px-2 py-0.5 rounded border border-zinc-900">{node.d}</span>
+                          <div>
+                            <h4 className="font-bold text-zinc-300">{node.h}</h4>
+                            <p className="text-zinc-500 text-[11px] mt-0.5 leading-normal">{node.b}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* TAB 2: SYSTEMIC CHRONOLOGICAL TIMELINE STREAM */}
+              {activeTab === 'wire' && (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} key="wire" className="space-y-4">
+                  <div className="flex items-center justify-between border-b border-zinc-900 pb-3 mb-1">
+                    <span className="text-xs font-black uppercase tracking-widest text-zinc-400">Chronological Event-Horizon Stream Log</span>
+                    <Activity className="h-4 w-4 text-zinc-600 animate-spin" />
+                  </div>
+                  <div className="space-y-3 text-xs leading-relaxed text-zinc-400">
+                    <div className="p-4 bg-[#030303] border border-zinc-950 rounded-xl space-y-1">
+                      <span className="text-emerald-400 font-bold text-[10px] uppercase block tracking-wider">[Macro Pulse // Fed Strategy]</span>
+                      Liquidity consolidation profiles indicate systematic stabilization thresholds holding steady across domestic deployment environments.
+                    </div>
+                    <div className="p-4 bg-[#030303] border border-zinc-950 rounded-xl space-y-1">
+                      <span className="text-cyan-400 font-bold text-[10px] uppercase block tracking-wider">[Alpha Vector // Scale Shifts]</span>
+                      High-conviction capex updates confirm accelerated computing hardware architectures command dominant capital share allocations.
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* TAB 3: COMPREHENSIVE REUSABLE FISCAL INTEGRITY METERS SCORE GAUGE CARD */}
+              {activeTab === 'suite' && (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} key="suite" className="space-y-5">
+                  <div className="border-b border-zinc-900 pb-3">
+                    <h3 className="text-xs font-black uppercase tracking-widest text-zinc-400">Financial Wellness Health Verification Matrix</h3>
+                  </div>
+
+                  <div className="bg-[#030303] border border-zinc-950 p-4 rounded-xl space-y-3">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-zinc-400 font-bold">Aggregated Asset Safety Ratio</span>
+                      <span className={`font-bold px-2.5 py-0.5 rounded border ${healthScore >= 75 ? 'bg-emerald-500/5 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/5 text-amber-400 border-amber-500/20'}`}>
+                        {healthScore} / 100
+                      </span>
+                    </div>
+                    <div className="h-2 bg-zinc-950 border border-zinc-900 rounded-full overflow-hidden p-0.5">
+                      <div className="h-full bg-gradient-to-r from-zinc-700 via-zinc-400 to-white rounded-full transition-all duration-500" style={{ width: `${healthScore}%` }} />
+                    </div>
+                  </div>
+
+                  {/* PERMANENT NAV DOCK GRID FOOTER BAR FRAME */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-sans font-semibold text-zinc-400">
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-mono tracking-wider font-bold block text-zinc-600 uppercase">Monthly Savings Volume (₹)</label>
+                      <input type="number" value={calcSavings} onChange={(e) => setCalcSavings(Number(e.target.value))} className="w-full bg-[#030303] border border-zinc-900 rounded-xl p-2.5 font-mono text-white outline-none focus:border-zinc-700" />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-mono tracking-wider font-bold block text-zinc-600 uppercase">Outstanding Debt Runway (₹)</label>
+                      <input type="number" value={calcDebt} onChange={(e) => setCalcDebt(Number(e.target.value))} className="w-full bg-[#030303] border border-zinc-900 rounded-xl p-2.5 font-mono text-white outline-none focus:border-zinc-700" />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-mono tracking-wider font-bold block text-zinc-600 uppercase">Target Dividend Yield (%)</label>
+                      <input type="number" value={calcDiv} onChange={(e) => setCalcDiv(Number(e.target.value))} className="w-full bg-[#030303] border border-zinc-900 rounded-xl p-2.5 font-mono text-white outline-none focus:border-zinc-700" />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-mono tracking-wider font-bold block text-zinc-600 uppercase">Emergency Cash Reserves (₹)</label>
+                      <input type="number" value={calcEmerg} onChange={(e) => setCalcEmerg(Number(e.target.value))} className="w-full bg-[#030303] border border-zinc-900 rounded-xl p-2.5 font-mono text-white outline-none focus:border-zinc-700" />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <div className="absolute bottom-4 right-6 opacity-5 pointer-events-none">
+              <ShieldCheck className="h-24 w-24 text-white" />
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
   );
-}                                                                                                                      
+                      }
