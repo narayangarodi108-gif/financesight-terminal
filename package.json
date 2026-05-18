@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npx tailwindcss -i ./app/globals.css -o ./.next/static/css/app.css",
-    
-    "start": "next start"
+    "build": "bash build.sh",
+       "start": "next start"
   },
   "dependencies": {
     "react": "^18.3.1",
